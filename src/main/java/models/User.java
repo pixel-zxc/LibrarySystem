@@ -21,7 +21,6 @@ public class User {
         if(!borrowedBooks.containsKey(isbn))throw new RuntimeException("User haven't this book");
         borrowedBooks.remove(isbn);
     }
-    //#TODO
     public void setName(String name) {
         this.name = name;
     }

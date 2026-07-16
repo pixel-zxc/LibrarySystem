@@ -21,10 +21,10 @@ public class LibraryService {
         if(author==null) return List.of();
         return repository.findBooksByAuthor(author).orElse(List.of());
     }
-//    public boolean isAvailably(String isbn){
-//        if(isbn==null)return false;
-//        return repository.isAvailable(isbn);
-//    }
+    public boolean isAvailably(String isbn){
+        if(isbn==null)return false;
+        return repository.isAvailable(isbn);
+    }
     public boolean borrowBook(String isbn, User user){
         if(isbn ==null){
             System.out.println("ISBN cannot ba a null");
@@ -39,7 +39,7 @@ public class LibraryService {
             System.out.println("Book is not in library");
             return false;
         }
-        if(!repository.isAvailable(isbn)) {
+        if(!isAvailably(isbn)) {
             System.out.println("Book is not availably");
             return false;
         }

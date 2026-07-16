@@ -3,6 +3,7 @@ package models;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class User {
     private final long id;
@@ -15,11 +16,17 @@ public class User {
     }
     public void borrowBook(Book book){
         if(book==null) throw new NullPointerException("Book cannot be null");
+        if(borrowedBooks.containsKey(book.getIsbn())){
+            System.out.println("User always borrowed that book");
+        }
         borrowedBooks.put(book.getIsbn(),book);
     }
     public void returnBook(String isbn){
         if(!borrowedBooks.containsKey(isbn))throw new RuntimeException("User haven't this book");
         borrowedBooks.remove(isbn);
+    }
+    public Optional<Book> getBookByISBN(String isbn){
+        return Optional.of(borrowedBooks.get(isbn));
     }
     public void setName(String name) {
         this.name = name;

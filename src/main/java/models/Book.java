@@ -1,15 +1,17 @@
 package models;
 
+import java.util.Objects;
+
 public final class Book{
-    private final String tittle;
+    private final String title;
     private final String author;
     private final int yearOfRelease;
     private final String isbn;
-    private boolean available = true;
+
 
 
     public Book(String tittle, String author, int yearOfRelease, String isbn) {
-        this.tittle = tittle;
+        this.title = tittle;
         this.author = author;
         this.yearOfRelease = yearOfRelease;
         this.isbn = isbn;
@@ -17,25 +19,22 @@ public final class Book{
 
     @Override
     public String toString() {
-        return "Book[tittle: "+tittle+ ", author: "+author+", yearOfRelease: "+yearOfRelease+", isbn: "+isbn+']';
+        return "Book[tittle: "+title+ ", author: "+author+", yearOfRelease: "+yearOfRelease+", isbn: "+isbn+']';
     }
     @Override
     public int hashCode(){
-        return tittle.hashCode()+author.hashCode()+yearOfRelease+isbn.hashCode();
+        return Objects.hashCode(this);
     }
     @Override
     public boolean equals(Object o){
         if(o == this)return true;
         if(o == null || getClass()!=o.getClass())return false;
         Book book = (Book)o;
-        return book.isbn.equals(this.isbn) &&
-                book.author.equals(this.author) &&
-                book.tittle.equals(this.tittle) &&
-                book.yearOfRelease == this.yearOfRelease;
+        return Objects.equals(book,this);
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
     public String getAuthor() {
@@ -48,13 +47,5 @@ public final class Book{
 
     public String getIsbn() {
         return isbn;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
     }
 }

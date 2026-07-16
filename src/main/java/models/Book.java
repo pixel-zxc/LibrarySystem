@@ -23,7 +23,7 @@ public final class Book{
     }
     @Override
     public int hashCode(){
-        return Objects.hashCode(this);
+        return title.hashCode()+author.hashCode()+yearOfRelease+isbn.hashCode();
     }
     @Override
     public boolean equals(Object o){

@@ -16,10 +16,11 @@ public class User {
     }
     public void borrowBook(Book book){
         if(book==null) throw new NullPointerException("Book cannot be null");
-        if(borrowedBooks.containsKey(book.getIsbn())){
+        if(borrowedBooks.containsKey(book.isbn())){
             System.out.println("User always borrowed that book");
+            return;
         }
-        borrowedBooks.put(book.getIsbn(),book);
+        borrowedBooks.put(book.isbn(),book);
     }
     public void returnBook(String isbn){
         if(!borrowedBooks.containsKey(isbn))throw new RuntimeException("User haven't this book");

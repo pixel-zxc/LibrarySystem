@@ -1,5 +1,6 @@
 package service;
 
+import exception.BookNotAvailablyException;
 import models.User;
 import repository.LibraryRepository;
 import models.Book;
@@ -40,8 +41,7 @@ public class LibraryService {
             return false;
         }
         if(!isAvailably(isbn)) {
-            System.out.println("Book is not availably");
-            return false;
+            throw new BookNotAvailablyException(isbn);
         }
         Book book = optionalBook.get();
         user.borrowBook(book);
@@ -69,11 +69,14 @@ public class LibraryService {
     }
     private void changeAvailably(Book book){
         try{
-            repository.changeAvailably(book.getIsbn());
+            repository.changeAvailably(book.isbn());
         }catch (NullPointerException e){
             System.out.println("book don't have a ISBN!");
         }catch (RuntimeException e){
             System.out.println("Book can't be in Library!");
         }
+    }
+    public List<Book> findBooksPublisherAfter(int year){
+        return repository.findBooksPublishedAfter(year);
     }
 }
